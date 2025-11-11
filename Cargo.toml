@@ -1,0 +1,41 @@
+[package]
+name = "shroud-protocol"
+version = "0.1.0"
+description = "Privacy-preserving SPL token transfers on Solana"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/ShroudDotFun/Shroud-Protocol-Rust"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "shroud_protocol"
+
+[features]
+no-entrypoint = []
+no-idl = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = "0.29.0"
+anchor-spl = "0.29.0"
+solana-program = "1.17.0"
+spl-token = "4.0.0"
+borsh = "0.10.3"
+blake3 = "1.5.0"
+
+[dev-dependencies]
+solana-program-test = "1.17.0"
+solana-sdk = "1.17.0"
+tokio = { version = "1.35.0", features = ["full"] }
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
+
